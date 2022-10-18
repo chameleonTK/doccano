@@ -121,6 +121,14 @@ class Seq2seqProject(Project):
     def is_text_project(self) -> bool:
         return True
 
+    @property
+    def can_define_label(self) -> bool:
+        return True
+
+    @property
+    def can_define_category(self) -> bool:
+        return True
+
 
 class IntentDetectionAndSlotFillingProject(Project):
     @property

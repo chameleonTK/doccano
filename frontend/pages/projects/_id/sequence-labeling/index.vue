@@ -301,6 +301,6 @@ export default {
   font-weight: 500;
   line-height: 2rem;
   font-family: 'Roboto', sans-serif !important;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 </style>
