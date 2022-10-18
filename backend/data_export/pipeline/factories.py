@@ -47,7 +47,7 @@ def create_formatter(project: Project, file_format: str) -> List[Formatter]:
     # text tasks
     mapper_text_classification = {DATA: "text", Categories.column: "label"}
     mapper_sequence_labeling = {DATA: "text", Spans.column: "label"}
-    mapper_seq2seq = {DATA: "text", Texts.column: "label"}
+    mapper_seq2seq = {DATA: "text", Texts.column: "label", Categories.column: "category"}
     mapper_intent_detection = {DATA: "text", Categories.column: "cats"}
     mapper_relation_extraction = {DATA: "text"}
 
@@ -106,6 +106,7 @@ def create_formatter(project: Project, file_format: str) -> List[Formatter]:
             ],
             JSONL.name: [
                 ListedCategoryFormatter(Texts.column),
+                ListedCategoryFormatter(Categories.column),
                 ListedCategoryFormatter(Comments.column),
                 RenameFormatter(**mapper_seq2seq),
             ],
@@ -162,7 +163,7 @@ def select_label_collection(project: Project) -> List[Type[Labels]]:
     mapping: Dict[str, List[Type[Labels]]] = {
         DOCUMENT_CLASSIFICATION: [Categories],
         SEQUENCE_LABELING: [Spans, Relations] if use_relation else [Spans],
-        SEQ2SEQ: [Texts],
+        SEQ2SEQ: [Texts, Categories],
         IMAGE_CLASSIFICATION: [Categories],
         SPEECH2TEXT: [Texts],
         INTENT_DETECTION_AND_SLOT_FILLING: [Categories, Spans],
